@@ -1,14 +1,31 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { Fraunces, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import Header from "@components/elements/Header";
 import Footer from "@components/elements/Footer";
 import { SITE } from "@src/lib/site";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-serif" });
+// Self-hosted so builds don't depend on reaching Google Fonts. See src/app/fonts/README.md.
+const inter = localFont({
+  src: "./fonts/inter.woff2",
+  variable: "--font-sans",
+  weight: "100 900",
+  display: "swap",
+});
+const fraunces = localFont({
+  src: "./fonts/fraunces.woff2",
+  variable: "--font-serif",
+  weight: "100 900",
+  display: "swap",
+});
+const caveat = localFont({
+  src: "./fonts/caveat.woff2",
+  variable: "--font-hand",
+  weight: "400 700",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -35,9 +52,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#f7f3ea",
+};
+
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable} ${caveat.variable}`}>
       <body className="antialiased">
         <Analytics />
         <Header />
