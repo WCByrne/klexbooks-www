@@ -199,7 +199,14 @@ a.btn:hover {
   font-size: 26px;
   line-height: 1.05;
   color: #3d3a2c;
-  box-shadow: 0 10px 20px rgba(60, 50, 20, 0.16);
+  /* The corner is cut out of the background itself (transparent), so whatever
+     is behind the note shows through. drop-shadow follows that cut shape. */
+  background: linear-gradient(
+    315deg,
+    transparent 0 15.55px,
+    var(--note) 15.55px
+  );
+  filter: drop-shadow(0 8px 8px rgba(60, 50, 20, 0.16));
   z-index: 4;
 }
 .sticky::after {
@@ -207,15 +214,18 @@ a.btn:hover {
   position: absolute;
   right: 0;
   bottom: 0;
-  border-width: 0 0 22px 22px;
-  border-style: solid;
-  border-color: transparent transparent var(--paper) rgba(0, 0, 0, 0.06);
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(135deg, var(--fold) 50%, transparent 50%);
+  filter: drop-shadow(-1px -1px 1px rgba(60, 50, 20, 0.18));
 }
 .sticky-yellow {
-  background: var(--note-yellow);
+  --note: var(--note-yellow);
+  --fold: #d9c677;
 }
 .sticky-sage {
-  background: var(--note-sage);
+  --note: var(--note-sage);
+  --fold: #bccdb9;
 }
 
 .stamp {
@@ -1301,10 +1311,14 @@ a.btn:hover {
   position: relative;
   max-width: 640px;
   margin: 0 auto;
-  background: var(--note-yellow);
+  background: linear-gradient(
+    315deg,
+    transparent 0 28.28px,
+    var(--note-yellow) 28.28px
+  );
   padding: 56px 40px 44px;
   text-align: center;
-  box-shadow: 0 24px 40px rgba(60, 50, 20, 0.18);
+  filter: drop-shadow(0 20px 18px rgba(60, 50, 20, 0.18));
   transform: rotate(-1.5deg);
 }
 .final-note::after {
@@ -1312,9 +1326,10 @@ a.btn:hover {
   position: absolute;
   right: 0;
   bottom: 0;
-  border-width: 0 0 40px 40px;
-  border-style: solid;
-  border-color: transparent transparent var(--paper) rgba(0, 0, 0, 0.07);
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #d9c677 50%, transparent 50%);
+  filter: drop-shadow(-1px -1px 2px rgba(60, 50, 20, 0.18));
 }
 .final-icon {
   margin: -100px auto 18px;
