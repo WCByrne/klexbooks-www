@@ -1518,6 +1518,32 @@ a.btn:hover {
   color: var(--klex-sage);
   margin: 12px 0 0;
 }
+.site-footer-social {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+.site-footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid #4f5553;
+  color: var(--klex-cream);
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.site-footer-social a:hover {
+  background-color: var(--klex-terracotta);
+  border-color: var(--klex-terracotta);
+  transform: rotate(-6deg);
+}
+.site-footer-social svg {
+  width: 19px;
+  height: 19px;
+}
 .site-footer-links {
   display: flex;
   gap: 4rem;

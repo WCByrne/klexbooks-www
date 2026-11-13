@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import Header from "@components/elements/Header";
 import Footer from "@components/elements/Footer";
-import { SITE } from "@src/lib/site";
+import { SITE, SOCIAL } from "@src/lib/site";
 import "./globals.css";
 
 // Self-hosted so builds don't depend on reaching Google Fonts. See src/app/fonts/README.md.
@@ -67,10 +67,24 @@ export const viewport: Viewport = {
   themeColor: "#f7f3ea",
 };
 
+// Tells search engines which social profiles belong to Klex Books.
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE.name,
+  url: SITE.url,
+  logo: `${SITE.url}/app-icon.png`,
+  sameAs: SOCIAL.map((network) => network.url),
+};
+
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable} ${caveat.variable}`}>
       <body className="antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Analytics />
         <Header />
         {children}

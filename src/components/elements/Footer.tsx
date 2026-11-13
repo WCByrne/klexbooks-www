@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { SITE } from "@src/lib/site";
+import { SITE, SOCIAL } from "@src/lib/site";
+import SocialIcon from "@components/elements/SocialIcon";
 
 const Footer: React.FC = () => {
   return (
@@ -12,6 +13,21 @@ const Footer: React.FC = () => {
             <span>{SITE.name}</span>
           </Link>
           <p className="site-footer-note hand">made for people who do the work themselves.</p>
+          <ul className="site-footer-social">
+            {SOCIAL.map((network) => (
+              <li key={network.name}>
+                <a
+                  href={network.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${SITE.name} on ${network.name}`}
+                  title={`${network.name} · ${network.handle}`}
+                >
+                  <SocialIcon network={network.name} />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
         <div className="site-footer-links">
           <div className="site-footer-group">

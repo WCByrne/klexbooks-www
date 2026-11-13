@@ -10,6 +10,15 @@ export const SITE = {
   appStoreUrl: null as string | null,
 };
 
+// Shown in the footer and listed for search engines in src/app/layout.tsx.
+export const SOCIAL = [
+  { name: "Instagram", handle: "@klexbooks", url: "https://www.instagram.com/klexbooks/" },
+  { name: "Facebook", handle: "Klex Books", url: "https://www.facebook.com/profile.php?id=61596776030599" },
+  { name: "Threads", handle: "@klexbooks", url: "https://www.threads.com/@klexbooks" },
+] as const;
+
+export type SocialNetwork = (typeof SOCIAL)[number]["name"];
+
 // Keep in step with the app: App/Shared/Store/ProAccess.swift and App/KlexBooksPro.storekit.
 export const PRICING = {
   monthly: "$4.99",
