@@ -11,22 +11,25 @@
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
     "gray-matter": "^4.0.3",
-    "next": "15.5.23",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
+    "next": "15.5.29",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.6",
-    "@tailwindcss/postcss": "^4.3.3",
-    "@types/node": "^20.19.43",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
+    "@eslint/eslintrc": "^3.3.7",
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^24",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "eslint": "^9.39.5",
-    "eslint-config-next": "15.5.23",
-    "tailwindcss": "^4.3.3",
-    "typescript": "^5"
+    "eslint-config-next": "15.5.29",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.9.3"
   },
-  "packageManager": "yarn@4.9.2"
+  "packageManager": "yarn@4.9.2",
+  "engines": {
+    "node": ">=24 <25"
+  }
 }

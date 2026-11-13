@@ -4,6 +4,8 @@ Marketing site for Klex Books — landing page, privacy policy and help articles
 
 ## Develop
 
+Requires Node 24 (see `.nvmrc`).
+
 ```bash
 yarn install
 yarn dev
