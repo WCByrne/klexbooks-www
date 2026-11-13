@@ -10,4 +10,4 @@ edit the front matter above, and write the article in markdown below.
 
 ## A section heading
 
-Regular markdown works here — lists, **bold**, [links](https://www.klexbooks.com), and so on.
+Regular markdown works here — lists, **bold**, [links](https://www.klexbooks.app), and so on.

@@ -27,8 +27,19 @@ const caveat = localFont({
   display: "swap",
 });
 
+// Absolute URLs in the meta tags (like the share image) must point at a host that's actually
+// serving this build. On Vercel, production uses the project's production domain (the custom
+// domain once one is attached, otherwise the .vercel.app one) and previews use their own URL.
+function baseUrl() {
+  const production = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  if (process.env.VERCEL_ENV === "production" && production) return `https://${production}`;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  if (process.env.VERCEL_ENV === "production") return SITE.url;
+  return `http://localhost:${process.env.PORT ?? 3000}`;
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE.url),
+  metadataBase: new URL(baseUrl()),
   title: {
     default: `${SITE.name} — ${SITE.tagline}`,
     template: `%s | ${SITE.name}`,

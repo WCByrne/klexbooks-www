@@ -1,7 +1,7 @@
 // Single place for site-wide values. Update these before launch.
 export const SITE = {
   name: "Klex Books",
-  url: "https://www.klexbooks.com",
+  url: "https://www.klexbooks.app",
   tagline: "The back office for the one-person business.",
   description:
     "Klex Books keeps your clients, schedule, hours, invoices, expenses and mileage in one simple app for iPhone, iPad and Mac. Built for home organizers, handymen and other solo pros.",
