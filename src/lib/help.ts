@@ -12,6 +12,8 @@ export type ArticleMeta = {
   title: string;
   description?: string;
   order: number;
+  /** Optional ISO date (YYYY-MM-DD) from front matter, used for sitemap and structured data. */
+  date?: string;
 };
 
 export type Article = ArticleMeta & {
@@ -29,6 +31,12 @@ function readArticle(slug: string) {
     slug,
     title: data.title ?? slug,
     description: data.description,
+    date:
+      data.date instanceof Date
+        ? data.date.toISOString().slice(0, 10)
+        : typeof data.date === "string"
+          ? data.date
+          : undefined,
     order: typeof data.order === "number" ? data.order : 999,
   };
   return { meta, content };

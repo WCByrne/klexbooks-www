@@ -100,7 +100,7 @@ const CARDS: Card[] = [
 
 const Features: React.FC = () => {
   return (
-    <section className="toolbox">
+    <section className="toolbox" id="features">
       <div className="wrap">
         <div className="section-head">
           <p className="section-kicker hand">what’s in the toolbox</p>

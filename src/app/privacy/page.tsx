@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description: `How ${SITE.name} handles your information.`,
   alternates: { canonical: "/privacy" },
+  openGraph: { url: "/privacy" },
 };
 
 const EFFECTIVE_DATE = "November 9, 2026";

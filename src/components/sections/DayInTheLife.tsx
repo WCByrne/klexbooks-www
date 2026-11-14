@@ -43,7 +43,7 @@ const Log: React.FC<{ entries: Entry[]; className?: string }> = ({ entries, clas
 
 const DayInTheLife: React.FC = () => {
   return (
-    <section className="day" id="features">
+    <section className="day" id="day">
       <div className="wrap">
         <div className="section-head">
           <p className="section-kicker hand">a tuesday, start to finish</p>

@@ -4,7 +4,8 @@ import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import Header from "@components/elements/Header";
 import Footer from "@components/elements/Footer";
-import { SITE, SOCIAL } from "@src/lib/site";
+import { SITE, SOCIAL, baseUrl } from "@src/lib/site";
+import { jsonLd } from "@src/lib/jsonld";
 import "./globals.css";
 
 // Self-hosted so builds don't depend on reaching Google Fonts. See src/app/fonts/README.md.
@@ -27,17 +28,6 @@ const caveat = localFont({
   display: "swap",
 });
 
-// Absolute URLs in the meta tags (like the share image) must point at a host that's actually
-// serving this build. On Vercel, production uses the project's production domain (the custom
-// domain once one is attached, otherwise the .vercel.app one) and previews use their own URL.
-function baseUrl() {
-  const production = process.env.VERCEL_PROJECT_PRODUCTION_URL;
-  if (process.env.VERCEL_ENV === "production" && production) return `https://${production}`;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  if (process.env.VERCEL_ENV === "production") return SITE.url;
-  return `http://localhost:${process.env.PORT ?? 3000}`;
-}
-
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl()),
   title: {
@@ -46,12 +36,20 @@ export const metadata: Metadata = {
   },
   description: SITE.description,
   applicationName: SITE.name,
-  alternates: { canonical: "/" },
+  // Tab icons use the transparent, small-size artwork in public/favicon. src/app/favicon.ico
+  // covers the default /favicon.ico request, and src/app/apple-icon.png (the full app icon
+  // with its background) is used for the iOS home screen.
+  icons: {
+    icon: [
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: SITE.url,
     siteName: SITE.name,
     title: SITE.name,
     description: SITE.description,
@@ -68,13 +66,26 @@ export const viewport: Viewport = {
 };
 
 // Tells search engines which social profiles belong to Klex Books.
-const organizationJsonLd = {
+const siteJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: SITE.name,
-  url: SITE.url,
-  logo: `${SITE.url}/app-icon.png`,
-  sameAs: SOCIAL.map((network) => network.url),
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE.url}/#organization`,
+      name: SITE.name,
+      url: SITE.url,
+      logo: `${SITE.url}/app-icon.png`,
+      sameAs: SOCIAL.map((network) => network.url),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      name: SITE.name,
+      url: SITE.url,
+      description: SITE.description,
+      publisher: { "@id": `${SITE.url}/#organization` },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
@@ -83,7 +94,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <body className="antialiased">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={jsonLd(siteJsonLd)}
         />
         <Analytics />
         <Header />

@@ -1,6 +1,6 @@
 import { PRICING, SITE } from "@src/lib/site";
 
-const FAQS: { q: string; a: React.ReactNode }[] = [
+export const FAQS: { q: string; a: string }[] = [
   {
     q: "Is the free plan actually free?",
     a: `Yep. No trial clock, no credit card. You can run up to ${PRICING.freeActiveJobs} active jobs at a time with every core feature. Jobs you’ve finished don’t count, so plenty of solo businesses never need more.`,

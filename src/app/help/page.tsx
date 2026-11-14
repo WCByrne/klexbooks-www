@@ -5,11 +5,17 @@ import PageHeader from "@components/elements/PageHeader";
 import { getAllArticles } from "@src/lib/help";
 import { SITE } from "@src/lib/site";
 
-export const metadata: Metadata = {
-  title: "Help",
-  description: `Guides and answers for getting the most out of ${SITE.name}.`,
-  alternates: { canonical: "/help" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  // Keep the page out of search results until there's something on it.
+  const hasArticles = (await getAllArticles()).length > 0;
+  return {
+    title: "Help",
+    description: `Guides and answers for getting the most out of ${SITE.name}.`,
+    alternates: { canonical: "/help" },
+    openGraph: { url: "/help" },
+    ...(!hasArticles && { robots: { index: false, follow: true } }),
+  };
+}
 
 export default async function HelpIndex() {
   const articles = await getAllArticles();

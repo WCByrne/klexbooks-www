@@ -1435,6 +1435,17 @@ a.btn:hover {
   background-color: var(--bg-secondary);
 }
 
+/* Screenshots in help articles: phones stay phone-sized, Macs and iPads fill the column. */
+.prose img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 2em auto;
+}
+.prose img[src*="/iphone-"] {
+  max-width: min(300px, 80%);
+}
+
 /* ─── Help ────────────────────────────────────────────────────────────────── */
 
 .back-link {

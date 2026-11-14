@@ -33,24 +33,24 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      <div className="hero-art" aria-hidden="true">
+      <div className="hero-art">
         <div className="taped hero-phone">
           <Tape className="hero-phone-tape" />
           <Image
             src="/screens/iphone-job-billing.webp"
-            alt=""
+            alt="Klex Books job screen showing hours worked and an invoice ready to send"
             width={720}
             height={1492}
             priority
             sizes="(max-width: 960px) 260px, 300px"
           />
         </div>
-        <div className="sticky sticky-yellow hero-sticky-1 hand">Invoice sent from the driveway.</div>
-        <div className="sticky sticky-sage hero-sticky-2 hand">
+        <div className="sticky sticky-yellow hero-sticky-1 hand" aria-hidden="true">Invoice sent from the driveway.</div>
+        <div className="sticky sticky-sage hero-sticky-2 hand" aria-hidden="true">
           5 hrs × $70
           <br />= done.
         </div>
-        <div className="stamp hero-stamp">PAID</div>
+        <div className="stamp hero-stamp" aria-hidden="true">PAID</div>
       </div>
     </section>
   );

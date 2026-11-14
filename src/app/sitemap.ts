@@ -1,18 +1,20 @@
 import { MetadataRoute } from "next";
 import { getAllArticles } from "@src/lib/help";
-import { SITE } from "@src/lib/site";
+import { baseUrl } from "@src/lib/site";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const articles = (await getAllArticles()).map((article) => ({
-    url: `${SITE.url}/help/${article.slug}`,
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
+  const base = baseUrl();
+  const built = new Date();
+  const articles = await getAllArticles();
 
   return [
-    { url: SITE.url, changeFrequency: "monthly", priority: 1.0 },
-    { url: `${SITE.url}/help`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE.url}/privacy`, changeFrequency: "yearly", priority: 0.3 },
-    ...articles,
+    { url: base, lastModified: built },
+    { url: `${base}/privacy`, lastModified: built },
+    // /help is noindex until it has articles, so only list it once it does.
+    ...(articles.length > 0 ? [{ url: `${base}/help`, lastModified: built }] : []),
+    ...articles.map((article) => ({
+      url: `${base}/help/${article.slug}`,
+      lastModified: article.date ? new Date(article.date) : built,
+    })),
   ];
 }

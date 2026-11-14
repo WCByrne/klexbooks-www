@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@components/elements/PageHeader";
 import Container from "@components/elements/Container";
+
+export const metadata: Metadata = {
+  // Next already adds noindex to not-found pages.
+  title: "Page not found",
+};
 
 export default function NotFound() {
   return (
